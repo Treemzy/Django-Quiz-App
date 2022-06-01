@@ -1,0 +1,25 @@
+{% extends 'base1.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-12 col-sm-10 col-12">
+      <h2 class="text-center">Sign up as a {{ user_type }}</h2>
+      <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success">Sign up</button>
+         <small class="text-muted ml-2">
+           Already Have An Account ?
+           <a href="{% url 'login'%}">LOGIN</a>
+        </small>
+         <small class="text-muted ml-2 text-left">
+           <a href="{% url 'home'%}">Back Home</a>
+        </small>
+      </form>
+      <p class="text-center text-muted">&copy; Blessed Quiz App</p>
+    </div>
+  </div>
+{% endblock %}

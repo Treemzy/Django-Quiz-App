@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'Index' %}">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ subject.name }}</li>
+    </ol>
+  </nav>
+
+  <div class="row mb-3">
+    <div class="col-md-6 col-sm-8 col-12">
+      <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success">Save changes</button>
+        <a href="{% url 'Index' %}" class="btn btn-outline-secondary" role="button">Cancel</a>
+        <a href="{% url 'Delete' subject.pk %}" class="btn btn-danger float-right">Delete</a>
+      </form>
+    </div>
+  </div>
+{% endblock %}

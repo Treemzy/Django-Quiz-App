@@ -1,0 +1,73 @@
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %} Blessed Quiz {% endblock %}</title>
+    <link rel="icon" href="{% static 'img/favicon.png' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/fontello-2f186091/css/fontello.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'style/style.css' %}">
+    <!-- Font-icon css-->
+    <link rel="stylesheet"  href="{% static 'fonts/font-awesome/css/font-awesome.css' %}">
+    <link rel="stylesheet"  href="{% static 'fonts/font.css' %}">
+    {% if user.is_authenticated and user.is_teacher %}
+      <link rel="stylesheet" type="text/css" href="{% static 'css/teachers.css' %}">
+    {% else %}
+      <link rel="stylesheet" type="text/css" href="{% static 'css/students.css' %}">
+    {% endif %}
+  </head>
+  <body>
+  <nav class="navbar navbar-expand-sm bg-dark fixed-top navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="{% url 'home' %}">Blessed Quiz </a>
+   <!-- Toggle -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navscroll">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Links -->
+  <div class="collapse navbar-collapse" id="navscroll">
+      <ul class="navbar-nav mr-auto navbar-nav-scroll">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home' %}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="">About</a>
+        </li>
+
+      </ul>
+
+    <ul class="nav navbar-right">
+      {% if user.is_authenticated %}
+      <li class="nav-item">
+          <a href="" class="nav-link"><i class="fa fa-user-o"></i>
+              {% if request.user.is_authenticated %}
+                {{ request.user.username }}
+              {% endif %}
+          </a>
+      </li>
+      <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link"><i class="fa fa-power-off"></i> Logout</a></li>
+      {% else %}
+      <li class="nav-item"><a href="{% url 'signup' %}" class="nav-link"><i class="fa fa-codepen"></i> Sign-Up</a></li>
+      <li class="nav-item"><a href="{% url 'login' %}" class="nav-link"><i class="fa fa-sign-in"></i> Login</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
+    <div class="frmw">
+        {% block content %}
+         {% endblock %}
+    </div>
+
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+    <script type="text/javascript">
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+      })
+    </script>
+  </body>
+</html>

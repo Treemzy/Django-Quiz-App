@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% include 'AppQuiz/students/_header.html' with active='new' %}
+  <div class="card">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Quiz Subject</th>
+          <th>Course</th>
+          <th>Number of Questions</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for quiz in quizzes %}
+          <tr>
+            <td class="align-middle">{{ quiz.name }}</td>
+            <td class="align-middle">{{ quiz.subject.get_html_badge }}</td>
+            <td class="align-middle">{{ quiz.questions_count }} questions</td>
+            <td class="align-middle">
+              <a href="{% url 'students:take_quiz' quiz.pk %}" class="btn btn-success">Start quiz</a>
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td class="bg-light text-center font-italic" colspan="4">No quiz matching your interests at the moment.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+<br/>
+{% if is_paginated %}
+    <nav class="mb-4">
+      <ul class="pagination">
+        {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page=1">First</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="?page={{page_obj.previous_page_number}}">Previous</a>
+          </li>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+             <li class="page-item active">
+                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+             </li>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+              </li>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number}}">Next</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="?page={{page_obj.paginator.num_pages}}">Last</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+{% endif %}
+{% endblock %}

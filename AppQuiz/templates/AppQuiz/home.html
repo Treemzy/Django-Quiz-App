@@ -1,0 +1,47 @@
+{% extends 'base2.html' %}
+
+{% block content %}
+ <main class="container-fluid">
+   <div class="jumbotron text-white jumbotron-image shadow p-5 mb-4 text-white bg-dark rounded-3">
+    <div class=" py-5">
+      <h1 class="fw-bold text-white">Welcome To Blessed Quizz App</h1>
+      <p class="col-md-8 lead"> Improving the quality of Education and Exams Processes....</p>
+      <p class="col-md-8 lead"> Sign Up As <a  href="{% url 'student_signup' %}">Student Account</a> or <a  href="{% url 'teacher_signup' %}">Teacher Account</a></p>
+      <a href="{% url 'login' %}" class="btn btn-primary btn-lg" type="button">Get Started</a>
+    </div>
+  </div>
+
+ </main>
+<div class="container" style="padding:10px;">
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Role of A Student</h5>
+        <p class="card-text">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+        <a href="{% url 'teacher_signup' %}" class="btn btn-primary">Sign-Up As A Student</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Role of A Teacher</h5>
+        <p class="card-text">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+        <a href="{% url 'student_signup' %}" class="btn btn-primary">Sign-Up As A Teacher</a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<footer  class="footer mt-auto bg-dark py-3">
+    <div class="container text-center">
+       <span class="text-muted">&copy; Blessed Quiz 2021</span>
+    </div>
+</footer>
+
+{% endblock %}

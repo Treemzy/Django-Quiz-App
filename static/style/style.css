@@ -1,0 +1,45 @@
+.pad{
+    padding:30px;
+}
+.navbar-right a{
+    color:#fff !important;
+}
+.crds{
+    margin-top:80px;
+}
+.crd{
+    margin-top:20px;
+}
+.mb{
+    margin-bottom:10px;
+}
+
+.footer {
+    margin-top:167px !important;
+}
+.form{
+      margin-top:20px;
+}
+.group{
+      margin-top:20px;
+}
+.group button{
+    margin:5px;
+}
+.frm{
+    margin-top:70px;
+}
+body{
+ background:#fcfcfc;
+ }
+.frmw{
+    margin-top:80px;
+}
+.article-img {
+  height: 65px;
+  width: 65px;
+  margin-right: 16px;
+}
+ .asteriskField{
+    display: none !important;
+}

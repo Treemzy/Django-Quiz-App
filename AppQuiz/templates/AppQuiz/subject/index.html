@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">Subjects</li>
+    </ol>
+  </nav>
+  <h2 class="mb-3">Subjects</h2>
+  <a href="{% url 'Create' %}" class="btn btn-primary mb-3" role="button">Add Subjects</a>
+  <div class="card">
+    <table class="table mb-0 table-hover">
+      <thead class="bg-dark text-white">
+        <tr>
+          <th>Name</th>
+          <th>Color Code</th>
+          <th class="text-right">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for subject in subject %}
+          <tr>
+            <td class="align-middle"><a href="{% url 'Edit' subject.pk %}">{{ subject.name }}</a></td>
+            <td class="align-middle">{{ subject.color }} {{get_html_badge}} <span class="badge text-white" style=" background:{{ subject.color }};">Color</span> </td>
+            <td class="text-right">
+              <a href="{% url 'Edit' subject.pk %}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+              <a href="{% url 'Delete' subject.pk %}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td class="bg-light text-center font-italic" colspan="5">You haven't created any subjects yet.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+<br/>
+{% if is_paginated %}
+    <nav class="mb-4">
+      <ul class="pagination">
+        {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page=1">First</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="?page={{page_obj.previous_page_number}}">Previous</a>
+          </li>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+             <li class="page-item active">
+                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+             </li>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+              </li>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number}}">Next</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="?page={{page_obj.paginator.num_pages}}">Last</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+{% endif %}
+
+{% endblock %}

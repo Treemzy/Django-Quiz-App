@@ -1,0 +1,39 @@
+{% extends 'base1.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+  {% if form.non_field_errors %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {% for error in form.non_field_errors %}
+        <p {% if forloop.last %} class="mb-0"{% endif %}>{{ error }}</p>
+      {% endfor %}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  {% endif %}
+  <div class="row">
+    <div class="col-lg-12 col-md-6 col-sm-12 col-12">
+      <h2 class="text-center">Log-In</h2>
+      <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        {{ form.username|as_crispy_field }}
+        {{ form.password|as_crispy_field }}
+        <button type="submit" class="btn btn-primary">Log in</button>
+        <small class="text-muted ml-2">
+           <a href="{% url 'password_resets'%}">Forgot Password?</a>
+        </small>
+        <small class="text-muted ml-2">
+           Don't Have An Account ?
+           <a href="{% url 'signup'%}">Sign-Up</a>
+        </small>
+         <small class="text-muted ml-2 text-left">
+           <a href="{% url 'home'%}">Back Home</a>
+        </small>
+      </form>
+      <p class="text-center text-muted">&copy; Blessed Quiz App</p>
+    </div>
+  </div>
+{% endblock %}
